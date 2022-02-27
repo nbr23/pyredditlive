@@ -1,0 +1,2 @@
+telegram_bot: 'botXXXXXXXXXXXXx' # Bot token of your telegram bot
+telegram_chat_id: '' # chat_id of the contact or group to send the messages to
