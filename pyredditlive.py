@@ -39,16 +39,6 @@ def post_update(update, config):
             requests.get(
                 f'https://api.telegram.org/{config["telegram_bot"]}/sendMessage?chat_id={config.get("telegram_chat_id")}&text={urllib.parse.quote_plus(body)}'
             )
-    elif update.get("type") == "embeds_ready":
-        for embed in update.get("payload", {}).get("mobile_embeds", []):
-            description = embed.get("description", "")
-            title = embed.get("title", "")
-            html = embed.get("html")
-            if html is not None:
-                print(f"POSTING {title}\n{description}\n{html}")
-                requests.get(
-                    f'https://api.telegram.org/{config["telegram_bot"]}/sendMessage?chat_id={config.get("telegram_chat_id")}&text={urllib.parse.quote_plus(title)}'
-                )
 
 
 async def livethread(url, config):
