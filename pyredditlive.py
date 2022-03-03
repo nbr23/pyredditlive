@@ -8,6 +8,7 @@ import sys
 import os
 import yaml
 import urllib
+import time
 
 
 def load_config(config_path):
@@ -67,7 +68,11 @@ async def livethread(url, config):
 
 def main():
     config = load_config("./config.yml")
-    asyncio.run(livethread(sys.argv[1], config))
+    while True:
+        try:
+            asyncio.run(livethread(sys.argv[1], config))
+        except asyncio.exceptions.TimeoutError:
+            time.sleep(5)
 
 
 if __name__ == "__main__":
