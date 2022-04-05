@@ -11,12 +11,19 @@ import urllib
 
 
 def load_config(config_path):
-    config = None
-    if not os.path.isfile(config_path):
-        print("Config file '%s' not found." % config_path)
-        return None
-    with open(config_path) as configfile:
-        config = yaml.load(configfile, Loader=yaml.SafeLoader)
+    config = {}
+
+    if os.path.exists(config_path):
+        with open(config_path) as configfile:
+            config = yaml.load(configfile, Loader=yaml.SafeLoader)
+    if 'PYRL_TELEGRAM_BOT' in os.environ:
+        config['telegram_bot'] = os.environ['PYRL_TELEGRAM_BOT']
+    if 'PYRL_TELEGRAM_CHAT_ID' in os.environ:
+        config['telegram_chat_id'] = os.environ['PYRL_TELEGRAM_CHAT_ID']
+
+    if 'telegram_bot' not in config or 'telegram_chat_id' not in config:
+        raise Exception("No configuration file found or environment variable set")
+
     return config
 
 

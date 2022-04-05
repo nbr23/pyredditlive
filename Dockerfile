@@ -8,4 +8,4 @@ RUN pip install -r requirements.txt
 
 COPY ./pyredditlive.py .
 
-CMD ["python3", "pyredditlive.py"]
+ENTRYPOINT ["python3", "-u", "pyredditlive.py"]
